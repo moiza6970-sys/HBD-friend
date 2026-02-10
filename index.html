@@ -1,17 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        body { background: #000; color: #fff; text-align: center; font-family: 'Arial', sans-serif; padding: 50px 20px; }
-        h1 { color: #ff69b4; font-size: 3rem; text-shadow: 0 0 10px #ff69b4; }
-        p { font-size: 1.2rem; line-height: 1.6; }
-        .cake { font-size: 5rem; margin: 20px 0; }
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; font-family: 'Poppins', sans-serif; margin: 0; overflow: hidden;
+        }
+        .card {
+            background: white; padding: 40px 30px; border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
+            width: 320px; z-index: 10; border: 4px solid #f06292;
+        }
+        h1 { font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 2.5rem; }
+        .emoji { font-size: 4rem; margin: 15px 0; display: block; }
+        .button {
+            background: #f06292; color: white; border: none;
+            padding: 12px 25px; border-radius: 50px; font-weight: 600;
+            cursor: pointer; margin-top: 20px;
+        }
+        #secret-message {
+            display: none; margin-top: 20px; padding: 15px;
+            background: #fff0f5; border-radius: 10px;
+            color: #d81b60; font-weight: bold; font-style: italic;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <h1>Happy Birthday! 🎂</h1>
-    <div class="cake">✨🎈🎁</div>
-    <p>Wishing you the most amazing day ever filled with joy and surprises!</p>
+
+    <div class="card">
+        <h1>Happy Birthday!</h1>
+        <span class="emoji">🎁</span>
+        <p>Sending you a box full of joy and sunshine today!</p>
+        
+        <button class="button" onclick="revealSecret()">Tap for your secret message!</button>
+        
+        <div id="secret-message">
+            "You are the most amazing person I know! I hope this year brings you everything you've been dreaming of. ❤️"
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Confetti pops as soon as the page opens
+        window.onload = () => {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        };
+
+        function revealSecret() {
+            // Reveal the message
+            document.getElementById('secret-message').style.display = 'block';
+            // Pop more confetti for the big reveal!
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.7 },
+                colors: ['#ff69b4', '#ff1493', '#ffffff']
+            });
+        }
+    </script>
 </body>
 </html>
+<p id="secret-text" style="display:none; margin-top: 20px; color: #d81b60; font-weight: bold; font-style: italic;">
+   "I am so lucky to have you in my life. Let's celebrate soon!"
+</p>
+function celebrate() {
+    // This part does the confetti
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+
+    // This part reveals the secret message!
+    document.getElementById('secret-text').style.display = 'block';
+}
