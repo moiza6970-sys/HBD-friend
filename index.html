@@ -70,14 +70,4 @@
 <p id="secret-text" style="display:none; margin-top: 20px; color: #d81b60; font-weight: bold; font-style: italic;">
    "I am so lucky to have you in my life. Let's celebrate soon!"
 </p>
-function celebrate() {
-    // This part does the confetti
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
 
-    // This part reveals the secret message!
-    document.getElementById('secret-text').style.display = 'block';
-}
