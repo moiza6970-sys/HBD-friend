@@ -3,106 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amama // 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <title>AMAMA // 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #000; --text: #1a1a1a; --soft: #f4f4f4; }
-        * { box-sizing: border-box; }
+        :root {
+            --bg: #fafafa;
+            --card: #ffffff;
+            --text: #111111;
+            --accent: #000;
+            --border: #e5e5e5;
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
-        body { margin: 0; font-family: 'Inter', sans-serif; background: #fff; color: var(--text); }
-
-        /* Split Layout */
-        .main-wrapper { display: flex; flex-direction: column; }
-        @media (min-width: 900px) { .main-wrapper { flex-direction: row; } }
-
-        /* Left Side: Sticky Identity */
-        .sidebar {
-            background: var(--soft); padding: 60px;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        @media (min-width: 900px) {
-            .sidebar { width: 40%; height: 100vh; position: sticky; top: 0; }
+        body {
+            margin: 0; background-color: var(--bg); color: var(--text);
+            font-family: 'Outfit', sans-serif;
         }
 
-        .logo { font-family: 'Syne', sans-serif; font-size: 1.2rem; letter-spacing: -1px; }
-        .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; margin: 40px 0; text-transform: uppercase; }
-
-        /* Right Side: Scrolling Content */
-        .content { flex: 1; padding: 60px; }
-
-        .content-section { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid #eee; margin-bottom: 60px; }
-
-        .num { font-family: 'Syne', sans-serif; font-size: 0.9rem; margin-bottom: 20px; color: #bbb; }
-        .heading { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 20px; }
-        .body-text { font-size: 1.25rem; line-height: 1.6; max-width: 500px; color: #555; }
-
-        /* Interactive Prize Bar */
-        .prize-bar {
-            background: var(--accent); color: #fff; padding: 40px; border-radius: 4px;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            overflow: hidden; position: relative;
+        /* The Bento Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(180px, auto);
+            gap: 16px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .prize-bar:hover { filter: invert(1); }
+
+        /* Responsive Grid for Mobile */
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.4s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .item:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+        /* Large Hero Card */
+        .item-large { grid-column: span 2; grid-row: span 2; background: var(--accent); color: #fff; }
+
+        .item-medium { grid-column: span 2; }
+
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; margin: 0; text-transform: uppercase; }
         
-        #hidden-wish { display: none; margin-top: 30px; font-size: 1.5rem; font-weight: 500; }
+        .hero-text { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1; }
+        .tag { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-bottom: 10px; display: block; }
+        
+        .message-text { font-size: 1.1rem; line-height: 1.5; font-weight: 300; }
 
-        .footer { font-size: 0.8rem; color: #999; margin-top: 100px; }
+        /* Interactive Prize Box */
+        .gift-box {
+            background: #f0f0f0; border-radius: 20px; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; cursor: pointer; transition: 0.3s;
+        }
+        .gift-box:hover { background: #e0e0e0; font-size: 2.5rem; }
+
+        /* Marquee Ticker Tape */
+        .marquee {
+            grid-column: span 4;
+            background: #000; color: #fff;
+            padding: 15px 0; border-radius: 100px;
+            overflow: hidden; white-space: nowrap;
+        }
+        @media (max-width: 768px) { .marquee { grid-column: span 2; } }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .marquee span { padding: 0 40px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.2rem; }
+
+        .btn-celebrate {
+            grid-column: span 4;
+            background: #fff; border: 1px solid #000;
+            padding: 25px; border-radius: 24px;
+            font-family: 'Space Grotesk'; font-weight: 700;
+            cursor: pointer; font-size: 1.5rem; transition: 0.3s;
+        }
+        @media (max-width: 768px) { .btn-celebrate { grid-column: span 2; } }
+        .btn-celebrate:hover { background: #000; color: #fff; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-    <aside class="sidebar">
-        <div class="logo">HB // AMAMA</div>
-        <h1 class="hero-title">A<br>MA<br>MA.</h1>
-        <div class="footer-meta">
-            <p>Curated for excellence.</p>
-            <p>© 2026 // By Moiz</p>
-        </div>
-    </aside>
-
-    <main class="content">
-        <section class="content-section">
-            <div class="num">01 // THE OCCASION</div>
-            <div class="heading">A New Chapter.</div>
-            <p class="body-text">Today marks the celebration of brilliance. Amama, your impact is undeniable, and your journey is just beginning.</p>
-        </section>
-
-        <section class="content-section">
-            <div class="num">02 // THE MESSAGE</div>
-            <div class="heading">From Moiz.</div>
-            <p class="body-text">Professional growth, personal happiness, and endless success—this is my wish for you as you step into another year of greatness.</p>
-        </section>
-
-        <section class="content-section">
-            <div class="num">03 // THE INTERACTION</div>
-            <div class="prize-bar" onclick="revealPrize()">
-                <span style="font-family: 'Syne'; font-size: 1.5rem;">UNLOCK SURPRISE</span>
-                <span>→</span>
+    <div class="grid-container">
+        <div class="item item-large">
+            <div>
+                <span class="tag">Celebrating excellence</span>
+                <h1 class="hero-text">AMAMA<br>2026.</h1>
             </div>
-            <div id="hidden-wish">
-                "To the most hardworking and talented friend—may this year be your most rewarding yet. Keep winning."
-            </div>
-        </section>
-
-        <div class="footer">
-            Designed with precision for a special birthday.
+            <p>A curated experience by Moiz.</p>
         </div>
-    </main>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-    function revealPrize() {
-        document.getElementById('hidden-wish').style.display = 'block';
-        confetti({
-            particleCount: 150,
-            spread: 100,
-            origin: { y: 0.6 },
-            colors: ['#000000', '#666666', '#f4f4f4']
-        });
-    }
-</script>
+        <div class="item item-medium">
+            <span class="tag">The Message</span>
+            <p class="message-text">"To a friend whose brilliance inspires everyone around her. Happy Birthday, Amama. Your journey into another year is a win for us all."</p>
+        </div>
 
+        <div class="item">
+            <span class="tag">Surprise 01</span>
+            <div class="gift-box" onclick="pop(this)">🎁</div>
+        </div>
+
+        <div class="item">
+            <span class="tag">Surprise 02</span>
+            <div class="gift-box" onclick="pop(this)">🎂</div>
+        </div>
+
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>SUCCESS</span> <span>BRILLIANCE</span> <span>AMAMA</span> <span>HAPPINESS</span> <span>MOIZ</span> <span>SUCCESS</span> <span>BRILLIANCE</span> <span>AMAMA</span> <span>HAPPINESS</span>
+            </div>
+        </div>
+
+        <button class="btn-celebrate" onclick="megaLaunch()">LAUNCH CELEBRATION →</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        function pop(el) {
+            el.innerHTML = "✨";
+            confetti({ particleCount: 30, spread: 50, origin: { y: 0.8 }, colors: ['#000', '#666'] });
+        }
+
+        function megaLaunch() {
+            var end = Date.now() + (4 * 1000);
+            (function frame() {
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#000', '#333'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#000', '#333'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+    </script>
 </body>
 </html>
